@@ -85,14 +85,14 @@ sunrise = sunrise.strftime('%d-%m-%Y %H:%M:%S')
 reference = datetime.utcfromtimestamp(Reference_time) + timedelta(minutes=minutes)  # Reference Time + UTC Offset
 reference = reference.strftime('%d-%m-%Y %H:%M:%S')
 
-print("Temperatur [Celsius]: ", get_temp(), "/ Gefühlt [Celsius]:", get_feels_like())  # Temperatur
-print("Sonnenaufgang: ", sunrise)  # Sonnenaufgang Uhrzeit
-print("Sonnenuntergang: ", sunset)  # Sonnenuntergang Uhrzeit
-print("Referenz-Zeit [Aktuelle Zeit in " + place + "]: ", reference)  # Referenzzeit
-print("Windgeschwindigkeit: ", round(Wind_speed), "km/h")  # Windgeschwindigkeit
-print("Luftfeuchtigkeit: ", w.to_dict()['humidity'], "%")  # Luftfeuchtigkeit
-print("Status: ", w.to_dict()['detailed_status'])  # Genereller Status
-print("Wolkenbedeckung: ", w.to_dict()['clouds'], "%")  # Wolkenbedeckung
-print("Druck: ", get_pressure())  # Druck
+print("Temperatur [Celsius]: ", get_temp(), "/ Gefühlt [Celsius]:", get_feels_like())
+print("Sonnenaufgang: ", sunrise)
+print("Sonnenuntergang: ", sunset)
+print("Referenz-Zeit [Aktuelle Zeit in " + place + "]: ", reference)
+print("Windgeschwindigkeit: ", round(Wind_speed), "km/h")
+print("Luftfeuchtigkeit: ", w.to_dict()['humidity'], "%")
+print("Status: ", w.to_dict()['detailed_status'])
+print("Wolkenbedeckung: ", w.to_dict()['clouds'], "%")
+print("Druck: ", get_pressure())
 
 input()
