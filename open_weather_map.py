@@ -6,7 +6,7 @@ from timezonefinder import TimezoneFinder
 from datetime import datetime
 import pytz
 
-owm = OWM('d44955ac52980cf0f70defda251d3fe0')
+owm = OWM('YOUR_OPEN_WEATHER_MAP_API_KEY')
 mgr = owm.weather_manager()
 
 print(""" 
