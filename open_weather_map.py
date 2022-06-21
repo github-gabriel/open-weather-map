@@ -42,49 +42,14 @@ def time_difference():
     return date
 
 
-def get_temperature():
-    tmp = w.temperature('celsius')
-    return tmp['temp']
+def get_temp():
+    temp = w.temperature('celsius')
+    return temp['temp']
 
 
-def get_sunrise():
-    sunrise = w.to_dict()
-    return sunrise['sunrise_time']
-
-
-def get_sunset():
-    sunset = w.to_dict()
-    return sunset['sunset_time']
-
-
-def get_wind_speed():
-    wind_speed = w.wind('meters_sec')
-    return wind_speed['speed']
-
-
-def get_humidity():
-    humidity = w.to_dict()
-    return humidity['humidity']
-
-
-def get_pressure():
-    pressure = w.to_dict()
-    return pressure['press']
-
-
-def get_reference_time():
-    reference_time = w.to_dict()
-    return reference_time['reference_time']
-
-
-def get_clouds():
-    clouds = w.to_dict()
-    return clouds['clouds']
-
-
-def get_status():
-    status = w.to_dict()
-    return status['detailed_status']
+def get_speed():
+    speed = w.wind('meters_sec')
+    return speed['speed']
 
 
 def get_pressure():
@@ -93,17 +58,17 @@ def get_pressure():
     return pressure['press']
 
 
-def get_temperature_1():
+def get_feels_like():
     feels_like = w.temperature('celsius')
     return feels_like['feels_like']
 
 
-sunrise_time = get_sunrise()
-sunset_time = get_sunset()
-Wind_speed = get_wind_speed()
+sunrise_time = w.to_dict()['sunrise_time']
+sunset_time = w.to_dict()['sunset_time']
+Wind_speed = get_speed()
 Wind_speed = Wind_speed * 3600
 Wind_speed = Wind_speed / 1000
-Reference_time = get_reference_time()
+Reference_time = w.to_dict()['reference_time']
 
 time_of_place = time_difference().replace(microsecond=0)
 offset = time_of_place.utcoffset().total_seconds() / 60  # Offset in Seconds / 60 -> Minutes
@@ -120,14 +85,14 @@ sunrise = sunrise.strftime('%d-%m-%Y %H:%M:%S')
 reference = datetime.utcfromtimestamp(Reference_time) + timedelta(minutes=minutes)  # Reference Time + UTC Offset
 reference = reference.strftime('%d-%m-%Y %H:%M:%S')
 
-print("Temperatur [Celsius]: ", get_temperature(), "/ Feels like [Celsius]:", get_temperature_1())  # Temperatur
+print("Temperatur [Celsius]: ", get_temp(), "/ Gefühlt [Celsius]:", get_feels_like())  # Temperatur
 print("Sonnenaufgang: ", sunrise)  # Sonnenaufgang Uhrzeit
 print("Sonnenuntergang: ", sunset)  # Sonnenuntergang Uhrzeit
 print("Referenz-Zeit [Aktuelle Zeit in " + place + "]: ", reference)  # Referenzzeit
 print("Windgeschwindigkeit: ", round(Wind_speed), "km/h")  # Windgeschwindigkeit
-print("Luftfeuchtigkeit: ", get_humidity())  # Luftfeuchtigkeit
-print("Status: ", get_status())  # Genereller Status
-print("Wolkenbedeckung: ", get_clouds(), "%")  # Wolkenbedeckung
+print("Luftfeuchtigkeit: ", w.to_dict()['humidity'], "%")  # Luftfeuchtigkeit
+print("Status: ", w.to_dict()['detailed_status'])  # Genereller Status
+print("Wolkenbedeckung: ", w.to_dict()['clouds'], "%")  # Wolkenbedeckung
 print("Druck: ", get_pressure())  # Druck
 
 input()
